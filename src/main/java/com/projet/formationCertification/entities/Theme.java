@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -23,6 +27,10 @@ private Collection<Formation> formations ;
 @OneToMany(mappedBy = "themeNiveau")
 @JsonBackReference(value="themeNiveau")
 private Collection<Niveau> niveaus ;
+
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name = "id_domaine")
+private Domaine domaine ;
 
 public Collection<Formation> getFormations() {
 	return formations;
@@ -48,10 +56,17 @@ public String getNom() {
 public void setNom(String nom) {
 	this.nom = nom;
 }
+
+public Domaine getDomaine() {
+	return domaine;
+}
+
+
+public void setDomaine(Domaine domaine) {
+	this.domaine = domaine;
+}
 public Theme() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-
-
 }

@@ -96,7 +96,7 @@ public Formation save(@RequestBody Formation f)
 
 @GetMapping(value="/pagerFormation")
 public Page<Formation> findAllDomaines(@RequestParam(name="page",defaultValue="0") int p , 
-		@RequestParam(name="size",defaultValue="4") int size)
+		@RequestParam(name="size",defaultValue="3") int size)
 
 {
 	return  frm.findAllPage( new PageRequest(p,size)) ;
@@ -167,5 +167,13 @@ public Page<Formation> findAllFormationNCC(@RequestParam(name="page",defaultValu
 			return false ; 
 		}
 	}
+  
+	@RequestMapping(value="/chercherf/{id}" , method=RequestMethod.GET)
+public List<Formation> findFormation(@PathVariable Long id )
+{
+	return  frm.findFormationTheme(id); 
+}
 	
+
+
 }

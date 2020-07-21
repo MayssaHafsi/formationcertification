@@ -21,12 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projet.formationCertification.dao.CertificationRepository;
 import com.projet.formationCertification.dao.NiveauRepository;
+import com.projet.formationCertification.dao.ThemeRepository;
 import com.projet.formationCertification.entities.Domaine;
 import com.projet.formationCertification.entities.Formateur;
 import com.projet.formationCertification.entities.Niveau;
 import com.projet.formationCertification.entities.Theme;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class NiveauController {
 @Autowired
@@ -34,6 +35,9 @@ NiveauRepository nvr ;
 
 @Autowired
 CertificationRepository cr ;
+
+@Autowired
+ThemeRepository tr ;
 
 @GetMapping(value="/niveaus")
 	public Collection<Niveau> getAll(){
@@ -49,6 +53,11 @@ public Niveau add(@RequestBody Niveau d)
 public List<Niveau> findTheme(@PathVariable Long id )
 {
 	return  nvr.find(id); 
+}
+@RequestMapping(value="/chercherDomaineTheme/{id}" , method=RequestMethod.GET)
+public List<Theme> findDomaine(@PathVariable Long id )
+{
+	return  tr.findTheme(id); 
 }
 @RequestMapping(value="/chercherNiveau/{id}" , method=RequestMethod.GET)
 public Niveau findNiveau(@PathVariable Long id )

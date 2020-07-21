@@ -1,4 +1,5 @@
 package com.projet.formationCertification.dao;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,10 @@ public interface ThemeRepository extends JpaRepository<Theme, Long> {
 	
 	@Query("SELECT v FROM Theme v WHERE v.id= :status")
 	Theme findId(  @Param("status") Long id);
+
+	@Query("SELECT v FROM Theme v WHERE v.domaine.id = :status")
+	List<Theme> findTheme( @Param("status") Long id);
+	 
 
 
 

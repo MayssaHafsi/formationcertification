@@ -1,7 +1,7 @@
 package com.projet.formationCertification.controller;
 
 import java.util.Collection;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,16 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projet.formationCertification.dao.CertificationRepository;
 import com.projet.formationCertification.dao.DomaineRepository;
 import com.projet.formationCertification.dao.FormationRepository;
+import com.projet.formationCertification.dao.ThemeRepository;
 import com.projet.formationCertification.entities.Domaine;
 import com.projet.formationCertification.entities.Formateur;
-
+import com.projet.formationCertification.entities.Theme;
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class DomaineController {
 @Autowired
 DomaineRepository dr ; 
 @Autowired
 FormationRepository fr ;
+@Autowired
+ThemeRepository tf ;
 @Autowired
 CertificationRepository cr ;
 @GetMapping(value="/domaines")
@@ -88,7 +91,11 @@ public Domaine findDomaine(@PathVariable Long id )
 	return  dr.find(id); 
 }
 
-
+@RequestMapping(value="/cherchert/{id}" , method=RequestMethod.GET)
+public List<Theme> findTheme(@PathVariable Long id )
+{
+	return  tf.findTheme(id); 
+}
 
 
 }
